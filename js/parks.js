@@ -21,6 +21,9 @@ fetch('https://api.themeparks.wiki/v1/destinations')
         const option = document.createElement('option');
         option.value = park.id;
         option.text = park.name;
+        if (park.name == "Carowinds") {
+          option.selected = "selected";
+        }
         selectElement.appendChild(option);
       });
     } else {
