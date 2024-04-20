@@ -5,12 +5,10 @@ const selector = document.getElementById('parkSelect');
 const tableBody = document.getElementById('tableBody');
 
 // Add event listener to the select element
-selector.addEventListener('change', () => {
+function populateTable(selectedParkId) {
   // Clear existing table rows
   tableBody.innerHTML = '';
 
-  // Get the selected park ID
-  const selectedParkId = selectElement.value
   var parkOpen = false
   fetch(`https://api.themeparks.wiki/v1/entity/${selectedParkId}/schedule`)
     .then(response => response.json())
@@ -61,4 +59,29 @@ selector.addEventListener('change', () => {
       .catch(error => console.error('Error fetching live data:', error));
     })
     .catch(error => console.error('Error fetching schedule data:', error));
+}
+
+function saveSelectedParkId(selectedParkId) {
+  saveSelectedParkId(selector.value);
+  localStorage.setItem('selectedParkId', selectedParkId);
+}
+
+function getLastUsedParkId() {
+  return localStorage.getItem('selectedParkId');
+}
+
+window.onload = function () {
+  var lastUsedParkId = getLastUsedParkId();
+  
+  if (lastUsedParkId) {
+    selector.value = lastUsedParkId;
+  } else {
+    // default to Carowinds
+    lastUsedParkId = "24cdcaa8-0500-4340-9725-992865eb18d6";
+  }
+  populateTable(lastUsedParkId);
+};
+
+selector.addEventListener('change', () => {
+  populateTable(selector.value);
 });
