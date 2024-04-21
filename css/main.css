@@ -65,3 +65,8 @@ figcaption {
     padding: 2px;
     text-align: center;
 }
+
+.table-container {
+    max-height: 900px;
+    overflow-y: auto;
+}
