@@ -6,11 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>QueueTycoon - Plan</title>
 
-  <link rel="stylesheet" href="css/font.css">
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="/css/font.css">
+  <link rel="stylesheet" href="/css/main.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="js/vendor/modernizr.js"></script>
 </head>
 <body class="page-home">
   <!-- Navigation bar -->
@@ -41,17 +40,6 @@
       <label for="selectPark">Select Park:</label>
       <select class="form-control" id="parkSelect">
       </select>
-      <script>
-        fetch('src/parks/destinations.json')
-        .then(res => {
-          console.log(res);
-        })
-        .then(data => {
-          data.array.forEach(element => {
-            
-          });
-        })
-      </script>
   </div>
   
   <div class="form-group">
@@ -75,7 +63,7 @@
       </select>
   </div>
   <div class="form-group">
-    <label for="selectPark">Arrival Time</label>
+    <label for="selectPark">Entrance Time</label>
     <select class="form-control" id="parkSelect">
       <option>
         Time
@@ -84,7 +72,7 @@
   </div>
   
   <div class="form-group">
-    <label for="selectPark">Leave Time</label>
+    <label for="selectPark">Exit Time</label>
     <select class="form-control" id="parkSelect">
       <option>
         Time
@@ -101,11 +89,9 @@
       </div>
     </div>
   </footer>
-
-  <script src="js/vendor.js"></script>
-  <script src="js/main.js"></script>
   <!-- Bootstrap JS and jQuery -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="js/planData.js"></script>
 </body>
 </html>
