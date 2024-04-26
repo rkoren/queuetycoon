@@ -67,6 +67,6 @@ figcaption {
 }
 
 .table-container {
-    max-height: 900px;
+    max-height: 800px;
     overflow-y: auto;
 }
