@@ -42,6 +42,7 @@ function getLastUsedParkId() {
 
 function handleSelectChange() {
     localStorage.setItem('selectedParkId', selectElement.value);
+    initializeDatepicker(selectElement.value);
 }
 
 selectElement.addEventListener('change', handleSelectChange);
