@@ -12,9 +12,11 @@ $(document).ready(function(){
   
     function isParkOpen(date, parkId) {
       var year = date.getFullYear();
-      var month = date.getMonth() + 1;
+      var month = date.getMonth() + 1
+      // adjust to mm
       var month = month < 10 ? '0' + month : month;
       var day = date.getDate();
+      // adjust to dd
       var day = day < 10 ? '0' + day : day;
   
       return $.ajax({
