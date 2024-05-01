@@ -13,7 +13,6 @@ function getParks() {
                             allParks.push(...destination.parks)
                         } else {
                             destination.parks.forEach(park => {
-                                console.log(destination.name);
                                 const modifiedName = park.name === destination.name ? park.name : `${destination.name} - ${park.name}`;
                                 park.name = modifiedName
                                 allParks.push(park);
@@ -64,11 +63,13 @@ function populateWaitTable(selectedParkId) {
         .then(data => {
             if (data.schedule && data.schedule.length > 0) {
                 const rn = new Date();
-                const currentSchedule = data.schedule.filter(schedule => schedule.type && schedule.type == "OPERATING")[0];
-                const openingTime = new Date(currentSchedule.openingTime);
-                const closingTime = new Date(currentSchedule.closingTime);
-                if (rn >= openingTime && rn <= closingTime) {
-                    parkOpen = true;
+                const currentSchedule = data.schedule.filter(schedule => schedule.type && schedule.type == "OPERATING");
+                if (currentSchedule.length > 0) {
+                    const openingTime = new Date(currentSchedule[0].openingTime);
+                    const closingTime = new Date(currentSchedule[0].closingTime);
+                    if (rn >= openingTime && rn <= closingTime) {
+                        parkOpen = true;
+                    }
                 }
             }
             fetch(`https://api.themeparks.wiki/v1/entity/${selectedParkId}/live`)
