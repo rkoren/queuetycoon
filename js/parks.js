@@ -68,12 +68,26 @@ function populateWaitTable(selectedParkId) {
                     if (data.liveData && data.liveData.length > 0) {
                         var items = data.liveData.filter(item => item.entityType && item.entityType == "ATTRACTION");
                         if (parkOpen) {
-                            items = items.filter(item => item.queue && item.queue.STANDBY.waitTime !== null);
+                            items = items.filter(item => item.queue);
                             items.forEach(item => {
+                                var q = item.queue;
                                 const row = tableBody.insertRow();
                                 row.insertCell(0).textContent = item.name;
                                 row.insertCell(1).textContent = item.status;
-                                row.insertCell(2).textContent = item.queue.STANDBY.waitTime.toString();
+                                if (typeof q.STANDBY === 'object') {
+                                    if (q.STANDBY.waitTime === null) {
+                                        row.insertCell(2).textContent = "N/A";
+                                    } else {
+                                        row.insertCell(2).textContent = q.STANDBY.waitTime;
+                                    }
+                                } else {
+                                    if (typeof q.BOARDING_GROUP === 'object') {
+                                        bg = q.BOARDING_GROUP
+                                        row.insertCell(2).textContent = "Groups " + bg.currentGroupStart + "-" + bg.currentGroupEnd;
+                                    } else {
+                                        row.insertCell(2).textContent = "Unknown :P"
+                                    }
+                                }
                             });
                         } else {
                             items.forEach(item => {
