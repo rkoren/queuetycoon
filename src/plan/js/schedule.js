@@ -9,7 +9,8 @@ $(document).ready(function(){
         }
       });
     }
-  
+    // Let's re-use to instead just issue a warning if we can't confirm the park will be open
+    // Schedule data not always complete
     function isParkOpen(date, parkId) {
       var year = date.getFullYear();
       var month = date.getMonth() + 1
