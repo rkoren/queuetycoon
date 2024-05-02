@@ -9,15 +9,23 @@ function getParks() {
                 if (data.destinations && data.destinations.length > 0) {
                     const allParks = [];
                     data.destinations.forEach(destination => {
-                        allParks.push(...destination.parks);
+                        if (destination.parks.length == 1) {
+                            allParks.push(...destination.parks)
+                        } else {
+                            destination.parks.forEach(park => {
+                                const modifiedName = park.name === destination.name ? park.name : `${destination.name} - ${park.name}`;
+                                park.name = modifiedName
+                                allParks.push(park);
+                            });
+                        }
                     });
 
                     allParks.sort((a, b) => a.name.localeCompare(b.name));
 
-                    allParks.forEach(park => {
+                    allParks.forEach(optionData => {
                         const option = document.createElement('option');
-                        option.value = park.id;
-                        option.text = park.name;
+                        option.value = optionData.id;
+                        option.text = optionData.name;
                         selectElement.appendChild(option);
                     });
 
