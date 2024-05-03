@@ -1,4 +1,7 @@
-function initializeDatepicker(parkId) {
+var currentParkId;
+
+function initializeDatepicker() {
+  $('#datepicker').datepicker('destroy');
   $('#datepicker').datepicker({
     format: 'yyyy-mm-dd',
     startDate: new Date(),
@@ -7,13 +10,14 @@ function initializeDatepicker(parkId) {
 
   $('#datepicker').on('changeDate', function(e) {
     var selectedDate = e.date;
-    checkParkSchedule(selectedDate, parkId);
+    checkParkSchedule(selectedDate, currentParkId);
   });
-}
+}  
 
 function checkParkSchedule(date, parkId) {
+  console.log(parkId);
   var year = date.getFullYear();
-  var month = date.getMonth() + 1
+  var month = date.getMonth() + 1;
   // adjust to mm
   var monthStr = month < 10 ? '0' + month : month;
   var day = date.getDate();
@@ -25,7 +29,6 @@ function checkParkSchedule(date, parkId) {
     url: 'https://api.themeparks.wiki/v1/entity/' + parkId + '/schedule/' + year + '/' + monthStr,
     method: 'GET',
     success: function(response) {
-      console.log(response);
       var dates = response.schedule;
       const foundDate = dates.find(day => {
         return day.date === formattedDate && day.type === "OPERATING";
@@ -45,7 +48,8 @@ function checkParkSchedule(date, parkId) {
 }
 
 $(document).ready(function(){
-  initializeDatepicker('7502308a-de08-41a3-b997-961f8275ab3c');
+  currentParkId = getLastUsedParkId();
+  initializeDatepicker();
 });
-
+       
   

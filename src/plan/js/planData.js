@@ -49,8 +49,10 @@ function getLastUsedParkId() {
 }
 
 function handleSelectChange() {
-    localStorage.setItem('selectedParkId', selectElement.value);
-    initializeDatepicker(selectElement.value);
+    const selectedParkId = selectElement.value;
+    localStorage.setItem('selectedParkId', selectedParkId);
+    currentParkId = selectedParkId;
+    initializeDatepicker();
 }
 
 selectElement.addEventListener('change', handleSelectChange);
