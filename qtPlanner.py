@@ -1,7 +1,6 @@
 import time
 import numpy as np
 
-# test
 class Plan(object):
     def __init__(self):
         self.scoreMap = {} #dictionary where we'll map point values to rides based on user input
