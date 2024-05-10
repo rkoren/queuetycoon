@@ -70,3 +70,9 @@ figcaption {
     max-height: 900px;
     overflow-y: auto;
 }
+
+.center-image {
+    text-align: center;
+    background-color: black;
+    padding: 10px;
+}
