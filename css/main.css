@@ -90,3 +90,7 @@ th, td {
     background-color: black;
     padding: 10px;
 }
+
+.challenge-form {
+    margin-bottom: 20px;
+  }
