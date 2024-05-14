@@ -70,6 +70,16 @@ figcaption {
     text-align: center;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
 .table-container {
     max-height: 900px;
     overflow-y: auto;
