@@ -14,17 +14,14 @@ function initializeSelectOptions() {
 
 function updateSelectOptions(selectedDate) {
     const selectElement = document.getElementById('dayOfWeekSelect');
-    <option>(Day of Week) Season Average</option>
-    if (selectedDate) {
-        const dayOfWeek = getDayOfWeek(selectedDate);
-        var option = document.createElement('option');
-        option.text = `Last ${dayOfWeek}`;
-        selectElement.add(option);
+    const dayOfWeek = getDayOfWeek(selectedDate);
+    var option = document.createElement('option');
+    option.text = `Last ${dayOfWeek}`;
+    selectElement.add(option);
 
-        option = document.createElement('option');
-        option.text = `Average ${dayOfWeek} (this year)`;
-        selectElement.add(option);
-    }
+    option = document.createElement('option');
+    option.text = `Average ${dayOfWeek} (this year)`;
+    selectElement.add(option);
 }
 
 // Listener for datepicker change
@@ -34,4 +31,4 @@ document.getElementById('datepicker').addEventListener('change', function() {
 });
 
 // Initialize with current day
-updateSelectOptions(getDayOfWeek(new Date()));
+updateSelectOptions(new Date());
