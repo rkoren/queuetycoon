@@ -3,6 +3,15 @@ function getDayOfWeek(date) {
     return days[new Date(date).getDay()];
 }
 
+function initializeSelectOptions() {
+    const currentDate = new Date();
+    const currentDayOfWeek = getDayOfWeek(currentDate);
+    const selectElement = document.getElementById('dayOfWeekSelect');
+    const option = document.createElement('option');
+    option.text = `Last ${currentDayOfWeek}`;
+    selectElement.add(option);
+}
+
 function updateSelectOptions(selectedDate) {
     const selectElement = document.getElementById('dayOfWeekSelect');
     <option>(Day of Week) Season Average</option>
@@ -24,5 +33,5 @@ document.getElementById('datepicker').addEventListener('change', function() {
     updateSelectOptions(selectedDate);
 });
 
-// Initialize with datepicker value
-updateSelectOptions(document.getElementById('datepicker').value);
+// Initialize with current day
+updateSelectOptions(getDayOfWeek(new Date()));
