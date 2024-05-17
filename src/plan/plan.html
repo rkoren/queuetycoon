@@ -2,6 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>QueueTycoon - Plan</title>
   <link rel="stylesheet" href="/css/font.css">
@@ -35,18 +36,18 @@
   </nav>
 
   <div class="container mt-3">
-    <div class="form-group">
+    <div class="day-form">
       <label for="selectPark">Select Park:</label>
       <select class="form-control" id="parkSelect">
       </select>
     </div>
 
-    <div class="form-group">
+    <div class="day-form">
       <label for="datepicker">Select a date:</label>
       <input type="text" class="form-control" id="datepicker" name="datepicker">
     </div>
 
-    <div class="form-group">
+    <div class="day-form">
       <label for="selectPark">Select Data:</label>
       <select class="form-control" id="dayOfWeekSelect">
         <option>Similar Day</option>
@@ -54,18 +55,22 @@
       </select>
     </div>
 
-    <div class="form-group">
+    <div class="day-form">
       <label for="selectPark">Entrance Time</label>
       <select class="form-control" id="entranceSelect">
         <option>Time</option>
       </select>
     </div>
 
-    <div class="form-group">
+    <div class="day-form">
       <label for="selectPark">Exit Time</label>
       <select class="form-control" id="exitSelect">
         <option>Time</option>
       </select>
+    </div>
+
+    <div class="day-form">
+      <button type="button" class="btn btn-outline-dark">Submit</button>
     </div>
   </div>
 
@@ -79,7 +84,6 @@
     </div>
   </footer>
 
-  <!-- Bootstrap JS and jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

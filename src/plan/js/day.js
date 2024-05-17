@@ -3,15 +3,6 @@ function getDayOfWeek(date) {
     return days[new Date(date).getDay()];
 }
 
-function initializeSelectOptions() {
-    const currentDate = new Date();
-    const currentDayOfWeek = getDayOfWeek(currentDate);
-    const selectElement = document.getElementById('dayOfWeekSelect');
-    const option = document.createElement('option');
-    option.text = `Last ${currentDayOfWeek}`;
-    selectElement.add(option);
-}
-
 function updateSelectOptions(selectedDate) {
     const selectElement = document.getElementById('dayOfWeekSelect');
     const dayOfWeek = getDayOfWeek(selectedDate);
