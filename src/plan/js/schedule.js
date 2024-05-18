@@ -15,7 +15,6 @@ function initializeDatepicker() {
 }  
 
 function checkParkSchedule(date, parkId) {
-  console.log(parkId);
   var year = date.getFullYear();
   var month = date.getMonth() + 1;
   // adjust to mm
