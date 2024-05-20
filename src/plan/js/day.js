@@ -20,7 +20,7 @@ function initializeSelectOptions() {
 function updateSelectOptions(selectedDate) {
     const selectElement = document.getElementById('dayOfWeekSelect');
     const dayOfWeek = getDayOfWeek(selectedDate);
-    
+
     var option = selectElement.options[2];
     option.value= `${dayOfWeek}`;
     option.text = `Last ${dayOfWeek}`;
@@ -31,7 +31,7 @@ function updateSelectOptions(selectedDate) {
 }
 
 // Listener for datepicker change
-document.getElementById('datepicker').addEventListener('change', function() {
+document.getElementById('datepicker').addEventListener('changeDate', function() {
     const selectedDate = this.value;
     console.log(selectedDate);
     updateSelectOptions(selectedDate);

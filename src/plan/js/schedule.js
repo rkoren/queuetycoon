@@ -9,8 +9,7 @@ function initializeDatepicker() {
   });
 
   $('#datepicker').on('changeDate', function(e) {
-    var selectedDate = e.date;
-    checkParkSchedule(selectedDate, currentParkId);
+    checkParkSchedule(e.date, currentParkId);
   });
 }  
 

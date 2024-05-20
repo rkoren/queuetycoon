@@ -52,7 +52,6 @@ function handleSelectChange() {
     const selectedParkId = selectElement.value;
     localStorage.setItem('selectedParkId', selectedParkId);
     currentParkId = selectedParkId;
-    initializeDatepicker();
 }
 
 selectElement.addEventListener('change', handleSelectChange);
