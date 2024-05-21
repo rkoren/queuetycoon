@@ -83,6 +83,7 @@ th, td {
 .table-container {
     max-height: 900px;
     overflow-y: auto;
+    margin-bottom: 20px;
 }
 
 .center-image {
