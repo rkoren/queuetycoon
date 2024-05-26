@@ -1,5 +1,3 @@
-# lambda WIP to collect queue data
-
 import json
 import requests
 import boto3
@@ -9,7 +7,6 @@ s3 = boto3.client('s3')
 bucket_name = 'queuetycoon'
 
 def fetch_park_data(park):
-    # Replace with your actual API endpoints and authentication if necessary
     schedule_url = f'https://api.themeparks.wiki/v1/entity/{park[0]}/schedule'
     wait_times_url = f'https://api.themeparks.wiki/v1/entity/{park[0]}/live'
     
@@ -23,7 +20,6 @@ def fetch_park_data(park):
         schedule = schedule[0]
         wait_times = wait_times_response.json()
         
-        # Check if the park is open
         opening_time = datetime.fromisoformat(schedule["openingTime"])
         closing_time = datetime.fromisoformat(schedule["closingTime"])
         offset = opening_time.utcoffset()
@@ -77,6 +73,3 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('Data fetched and stored successfully!')
     }
-
-if __name__ == "__main__":
-    test_handler()
