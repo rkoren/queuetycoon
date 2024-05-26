@@ -31,7 +31,6 @@ function getParks() {
 
                     const lastSelectedValue = localStorage.getItem('selectedParkId');
                     if (!lastSelectedValue) {
-                        // default to Alton Towers?
                         selectElement.value = allParks[0].id;
                     } else {
                         selectElement.value = lastSelectedValue;
