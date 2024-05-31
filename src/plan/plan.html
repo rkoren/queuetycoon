@@ -59,15 +59,9 @@
     <div class="day-form">
       <label for="selectPark">Select Rides:</label>
       <select class="form-control" id="parkSelect">
-          <option>
-              Rides
-          </option>
-          <option>
-              Shows/Attractions
-          </option>
-          <option>
-              Meals
-          </option>
+          <option value="assignRides">Assign Ride Values</option>
+          <option>Add Shows</option>
+          <option>Add Meals</option>
         </select>
     </div>
 
@@ -81,7 +75,7 @@
             Average (3 mph)
           </option>
           <option>
-            Aspiring Olympic Speedwalker (6+ mph)
+            Speedwalker (6+ mph)
           </option>
           <option>
             Teleport (Walk time ignored)
@@ -105,6 +99,30 @@
     </div>
   </div>
 
+  <div id="rideModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>`   
+        <h2>Assign Number Values to Rides</h2>
+        <form id="rideForm">
+            <div class="ride-item">
+                <label for="ride1">Ride 1:</label>
+                <input type="number" id="ride1" name="ride1" min="1" max="10" required>
+            </div>
+            <!-- Add more rides as needed -->
+            <div class="ride-item">
+                <label for="ride2">Ride 2:</label>
+                <input type="number" id="ride2" name="ride2" min="1" max="10" required>
+            </div>
+            <!-- ... up to Ride 10 -->
+            <div class="ride-item">
+                <label for="ride10">Ride 10:</label>
+                <input type="number" id="ride10" name="ride10" min="1" max="10" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+  </div>
+
   <footer class="bg-dark text-white">
     <div class="container">
       <div class="row">
@@ -122,5 +140,6 @@
   <script src="js/schedule.js"></script>
   <script src="js/planData.js"></script>
   <script src="js/day.js"></script>
+  <script src="js/rideForm.js"></script>
 </body>
 </html>
