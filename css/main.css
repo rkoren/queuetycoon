@@ -95,3 +95,7 @@ th, td {
 .day-form {
     margin-bottom: 20px;
 }
+
+.navbar-collapse {
+    padding-left: 20px;
+}
