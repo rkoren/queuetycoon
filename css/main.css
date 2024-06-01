@@ -100,6 +100,12 @@ th, td {
     padding-left: 20px;
 }
 
+.button-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
 .modal {
     display: none; 
     position: fixed; 

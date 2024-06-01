@@ -57,15 +57,6 @@
     </div>
 
     <div class="day-form">
-      <label for="selectPark">Select Rides:</label>
-      <select class="form-control" id="parkSelect">
-          <option value="assignRides">Assign Ride Values</option>
-          <option>Add Shows</option>
-          <option>Add Meals</option>
-        </select>
-    </div>
-
-    <div class="day-form">
       <label for="selectPark">Walking Speed:</label>
       <select class="form-control" id="parkSelect">
           <option>
@@ -81,6 +72,15 @@
             Teleport (Walk time ignored)
           </option>
         </select>
+    </div>
+
+    <div class="day-form">
+      <!-- Row of buttons -->
+      <div class="button-row">
+        <button id="assignRidesBtn">Assign Ride Values</button>
+        <button id="addMealsBtn">Add Meals</button>
+        <button id="addShowsBtn">Add Shows</button>
+      </div>
     </div>
 
     <div class="day-form">
@@ -101,19 +101,17 @@
 
   <div id="rideModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>`   
+        <span class="close">&times;</span>
         <h2>Assign Number Values to Rides</h2>
         <form id="rideForm">
             <div class="ride-item">
                 <label for="ride1">Ride 1:</label>
                 <input type="number" id="ride1" name="ride1" min="1" max="10" required>
             </div>
-            <!-- Add more rides as needed -->
             <div class="ride-item">
                 <label for="ride2">Ride 2:</label>
                 <input type="number" id="ride2" name="ride2" min="1" max="10" required>
             </div>
-            <!-- ... up to Ride 10 -->
             <div class="ride-item">
                 <label for="ride10">Ride 10:</label>
                 <input type="number" id="ride10" name="ride10" min="1" max="10" required>
