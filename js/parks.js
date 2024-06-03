@@ -1,5 +1,10 @@
 const selectElement = document.getElementById('parkSelect');
 const tableBody = document.getElementById('tableBody');
+let sortDirection = {
+    0: 'asc',
+    1: 'asc',
+    2: 'asc'
+};
 
 function getParks() {
     if (selectElement.childElementCount === 0) {
@@ -53,7 +58,6 @@ function getLastUsedParkId() {
     return localStorage.getItem('selectedParkId');
 }
 
-// Populate the Queue data table based on park
 function populateWaitTable(selectedParkId) {
     tableBody.innerHTML = '';
 
@@ -123,3 +127,38 @@ function handleSelectChange() {
 
 selectElement.addEventListener('change', handleSelectChange);
 getParks();
+
+function sortTable(columnIndex) {
+    const rows = Array.from(tableBody.rows);
+    const isNumeric = columnIndex === 2; // Wait Time is numeric
+
+    rows.sort((rowA, rowB) => {
+        const cellA = rowA.cells[columnIndex].innerText;
+        const cellB = rowB.cells[columnIndex].innerText;
+
+        if (isNumeric) {
+            const numA = cellA === "N/A" ? 999 : parseInt(cellA);
+            const numB = cellB === "N/A" ? 999 : parseInt(cellB);
+            return sortDirection[columnIndex] === 'asc'
+                ? numA - numB
+                : numB - numA;
+        } else {
+            return sortDirection[columnIndex] === 'asc'
+                ? cellA.localeCompare(cellB)
+                : cellB.localeCompare(cellA);
+        }
+    });
+
+    // Toggle the sorting direction
+    sortDirection[columnIndex] = sortDirection[columnIndex] === 'asc' ? 'desc' : 'asc';
+
+    // Clear existing rows
+    tableBody.innerHTML = '';
+
+    // Append the sorted rows
+    tableBody.append(...rows);
+
+    // Update header class
+    document.querySelectorAll('th').forEach(th => th.classList.remove('ascending', 'descending'));
+    document.querySelectorAll('th')[columnIndex].classList.add(sortDirection[columnIndex] === 'asc' ? 'ascending' : 'descending');
+}

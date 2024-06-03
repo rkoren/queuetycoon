@@ -145,3 +145,14 @@ th, td {
 .ride-item {
     margin-bottom: 15px;
 }
+
+th {
+    cursor: pointer;
+}
+
+.ascending::after {
+    content: " \25B2";
+}
+.descending::after {
+    content: " \25BC";
+}
