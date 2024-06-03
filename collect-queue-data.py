@@ -1,37 +1,40 @@
 import json
-import requests
+import urllib3
 import boto3
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 
 s3 = boto3.client('s3')
 bucket_name = 'queuetycoon'
+http = urllib3.PoolManager()
 
 def fetch_park_data(park):
     schedule_url = f'https://api.themeparks.wiki/v1/entity/{park[0]}/schedule'
     wait_times_url = f'https://api.themeparks.wiki/v1/entity/{park[0]}/live'
     
-    schedule_response = requests.get(schedule_url)
-    wait_times_response = requests.get(wait_times_url)
+    schedule_response = http.request('GET', schedule_url)
+    wait_times_response = http.request('GET', wait_times_url)
     
-    if schedule_response.status_code == 200 and wait_times_response.status_code == 200:
-        schedule = schedule_response.json()['schedule']
-        if not schedule:
+    if schedule_response.status == 200 and wait_times_response.status == 200:
+        scheduleData = json.loads(schedule_response.data)['schedule']
+        if not scheduleData:
             return None, ""
-        schedule = schedule[0]
-        wait_times = wait_times_response.json()
+        schedule = scheduleData[0]
+        wait_times = json.loads(wait_times_response.data)
         
         opening_time = datetime.fromisoformat(schedule["openingTime"])
         closing_time = datetime.fromisoformat(schedule["closingTime"])
-        offset = opening_time.utcoffset()
+        
+        time_zone = opening_time.tzinfo
+        current_time = datetime.now(timezone.utc).astimezone(time_zone)
 
-        current_time = datetime.now(timezone.utc) + offset
         if opening_time <= current_time <= closing_time and schedule["type"] == "OPERATING":
             return wait_times, current_time
     return None, ""
 
 def getParks():
     parks_url = f'https://api.themeparks.wiki/v1/destinations'
-    data = requests.get(parks_url).json()
+    data = http.request('GET', parks_url).data
+    data = json.loads(data)
     parks = []
     for destination in data['destinations']:
         for park in destination['parks']:
@@ -57,7 +60,6 @@ def test_handler():
 
 def lambda_handler(event, context):
     parks = getParks()
-    
     for park in parks:
         wait_times, current_time = fetch_park_data(park)
         if wait_times:
@@ -73,3 +75,6 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('Data fetched and stored successfully!')
     }
+
+if __name__ == "__main__":
+    test_handler()
