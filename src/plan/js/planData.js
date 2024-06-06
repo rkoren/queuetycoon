@@ -98,24 +98,24 @@ function populateRideForm(currentParkId) {
 function createForm(rideData) {
     const formContent = document.getElementById('rideList');
     formContent.innerHTML = '';
-    rideData.children.forEach(child => {
-        const div = document.createElement('div');
-        div.className = 'form-group';
 
-        const label = document.createElement('label');
-        label.textContent = child.name;
-        label.htmlFor = `input-${child.id}`;
+    rideData.children
+        .filter(child => child.entityType === "ATTRACTION")
+        .forEach(child => {
 
-        const input = document.createElement('input');
-        input.type = 'number';
-        input.min = 0;
-        input.max = 10;
-        input.id = `input-${child.id}`;
-        input.name = child.id; // The id will be stored as the input name
+            const label = document.createElement('label');
+            label.textContent = child.name;
+            label.htmlFor = `input-${child.id}`;
 
-        div.appendChild(label);
-        div.appendChild(input);
-        formContent.appendChild(div);
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.min = 0;
+            input.max = 10;
+            input.value = 0;
+            input.id = 'ride-item'
+
+            formContent.appendChild(label);
+            formContent.appendChild(input);
     });
 }
 
