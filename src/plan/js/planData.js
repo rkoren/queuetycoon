@@ -51,6 +51,7 @@ function handleSelectChange() {
     const selectedParkId = selectElement.value;
     localStorage.setItem('selectedParkId', selectedParkId);
     currentParkId = selectedParkId;
+    populateRideForm(currentParkId);
 }
 
 selectElement.addEventListener('change', handleSelectChange);
@@ -66,16 +67,8 @@ var span = document.getElementsByClassName("close")[0];
 
 // open the modal onclick
 assignRidesBtn.onclick = function() {
-  fetch(`https://api.themeparks.wiki/v1/entity/${currentParkId}/children`)
-  .then(response => response.json())
-  .then(data => {
-    console.log('Fetched Data:', data);
-    createForm(data);
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });
-  modal.style.display = "block";
+    populateRideForm(currentParkId);
+    modal.style.display = "block";
 }
 
 // close the modal on span click
@@ -90,8 +83,21 @@ window.onclick = function(event) {
     }
 }
 
+function populateRideForm(currentParkId) {
+    fetch(`https://api.themeparks.wiki/v1/entity/${currentParkId}/children`)
+    .then(response => response.json())
+    .then(data => {
+        console.log('Fetched Data:', data);
+        createForm(data);
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
+
 function createForm(rideData) {
     const formContent = document.getElementById('rideList');
+    formContent.innerHTML = '';
     rideData.children.forEach(child => {
         const div = document.createElement('div');
         div.className = 'form-group';
@@ -146,4 +152,4 @@ addMealsBtn.onclick = function() {
 
 addShowsBtn.onclick = function() {
     alert("Add Shows functionality to be implemented");
-}  
+}
