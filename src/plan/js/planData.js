@@ -101,7 +101,10 @@ function createForm(rideData) {
 
     rideData.children
         .filter(child => child.entityType === "ATTRACTION")
+        .sort((a, b) => a.name.localeCompare(b.name))
         .forEach(child => {
+            const div = document.createElement('div');
+            div.className = 'ride-item';
 
             const label = document.createElement('label');
             label.textContent = child.name;
@@ -112,10 +115,11 @@ function createForm(rideData) {
             input.min = 0;
             input.max = 10;
             input.value = 0;
-            input.id = 'ride-item'
+            input.id = `input-${child.id}`;
 
-            formContent.appendChild(label);
-            formContent.appendChild(input);
+            div.appendChild(label);
+            div.appendChild(input);
+            formContent.appendChild(div);
     });
 }
 

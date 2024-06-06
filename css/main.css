@@ -126,6 +126,8 @@ th, td {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    max-height: 900px;
+    overflow-y: auto; 
 }
 
 .close {
@@ -143,7 +145,23 @@ th, td {
 }
 
 .ride-item {
-    margin-bottom: 15px;
+    flex: 1 1 45%;
+    min-width: 100px; /* Minimum width of each form group */
+    margin-bottom: 10px;
+}
+
+.ride-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.ride-item input {
+    width: 75px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 th {
