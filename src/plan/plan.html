@@ -104,19 +104,8 @@
         <span class="close">&times;</span>
         <h2>Assign Value to Rides (0-10)</h2>
         <form id="rideForm">
-            <div class="ride-item">
-                <label for="ride1">Ride 1:</label>
-                <input type="number" id="ride1" name="ride1" value="0" min="0" max="10" required>
-            </div>
-            <div class="ride-item">
-                <label for="ride2">Ride 2:</label>
-                <input type="number" id="ride2" name="ride2" value="0" min="0" max="10" required>
-            </div>
-            <div class="ride-item">
-                <label for="ride10">Ride 3:</label>
-                <input type="number" id="ride3" name="ride3" value="0" min="0" max="10" required>
-            </div>
-            <button type="submit">Submit</button>
+          <div id="rideList"></div>
+          <button type="submit">Submit</button>
         </form>
     </div>
   </div>
@@ -138,6 +127,5 @@
   <script src="js/schedule.js"></script>
   <script src="js/planData.js"></script>
   <script src="js/day.js"></script>
-  <script src="js/rideForm.js"></script>
 </body>
 </html>
