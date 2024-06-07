@@ -99,28 +99,51 @@ function createForm(rideData) {
     const formContent = document.getElementById('rideList');
     formContent.innerHTML = '';
 
-    rideData.children
-        .filter(child => child.entityType === "ATTRACTION")
+    const rowContainer = document.createElement('div');
+    rowContainer.className = 'row-container';
+    formContent.appendChild(rowContainer);
+
+    const rides = rideData.children.filter(child => child.entityType === "ATTRACTION");
+    const ridesPerRow = 6;
+
+    rides
         .sort((a, b) => a.name.localeCompare(b.name))
-        .forEach(child => {
+        .forEach((child, index) => {
+            if (index > 0 && index % ridesPerRow === 0) {
+                const newRowContainer = document.createElement('div');
+                newRowContainer.className = 'row-container';
+                formContent.appendChild(newRowContainer);
+            }
+
             const div = document.createElement('div');
             div.className = 'ride-item';
 
             const label = document.createElement('label');
             label.textContent = child.name;
-            label.htmlFor = `input-${child.id}`;
+            label.htmlFor = `${child.id}`;
 
             const input = document.createElement('input');
             input.type = 'number';
             input.min = 0;
             input.max = 10;
             input.value = 0;
-            input.id = `input-${child.id}`;
+            input.id = `${child.id}`;
 
             div.appendChild(label);
             div.appendChild(input);
-            formContent.appendChild(div);
+            formContent.lastChild.appendChild(div);
     });
+
+    const lastRow = formContent.lastChild;
+    const itemsInLastRow = rides.length % ridesPerRow;
+    
+    if (itemsInLastRow > 0) {
+        for (let i = 0; i < ridesPerRow - itemsInLastRow; i++) {
+            const fillerDiv = document.createElement('div');
+            fillerDiv.className = 'ride-item filler';
+            lastRow.appendChild(fillerDiv);
+        }
+    }
 }
 
 // submit form

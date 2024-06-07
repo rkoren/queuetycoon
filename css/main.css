@@ -144,12 +144,6 @@ th, td {
     cursor: pointer;
 }
 
-.ride-item {
-    flex: 1 1 45%;
-    min-width: 100px; /* Minimum width of each form group */
-    margin-bottom: 10px;
-}
-
 .ride-item label {
     display: block;
     margin-bottom: 5px;
@@ -162,6 +156,37 @@ th, td {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.row-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.ride-item {
+    flex: 1 1 16.66%; /* 6 items per row */
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+@media (max-width: 1300px) {
+    .ride-item {
+        flex: 1 1 33.33%; /* 3 items per row */
+    }
+}
+
+@media (max-width: 650px) {
+    .ride-item {
+        flex: 1 1 50%; /* 2 items per row */
+    }
+}
+
+@media (max-width: 400px) {
+    .ride-item {
+        flex: 1 1 100%; /* 1 item per row */
+    }
 }
 
 th {
