@@ -65,21 +65,6 @@
       <select class="form-control" id="dayOfWeekSelect">
       </select>
     </div>
-    
-    <div class="day-form">
-      <label for="selectPark">Select Rides:</label>
-      <select class="form-control" id="parkSelect">
-          <option>
-              Rides
-          </option>
-          <option>
-              Shows/Attractions
-          </option>
-          <option>
-              Meals
-          </option>
-        </select>
-    </div>
 
     <div class="day-form">
       <label for="selectPark">Walking Speed:</label>
@@ -97,6 +82,25 @@
             Teleport (Walk time ignored)
           </option>
         </select>
+    </div>
+
+    <div class="day-form">
+      <div class="button-row">
+        <button id="assignRidesBtn" >Assign Ride Values</button>
+        <button id="addMealsBtn">Add Meals</button>
+        <button id="addShowsBtn">Add Shows</button>
+      </div>
+    </div>
+
+    <div id="rideModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Assign Value to Rides (0-10)</h2>
+        <form id="rideForm">
+          <div id="rideList"></div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
 
     <div class="day-form">
