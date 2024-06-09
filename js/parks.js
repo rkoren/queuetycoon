@@ -95,11 +95,13 @@ function populateWaitTable(selectedParkId) {
                                         row.insertCell(2).textContent = q.STANDBY.waitTime;
                                     }
                                 } else {
-                                    if (typeof q.BOARDING_GROUP === 'object') {
+                                    if (Object.keys(q).length === 0 || item.status === "CLOSED") {
+                                        row.insertCell(2).textContent = "N/A";
+                                    } else if (typeof q.BOARDING_GROUP === 'object') {
                                         bg = q.BOARDING_GROUP
                                         row.insertCell(2).textContent = "Groups " + bg.currentGroupStart + "-" + bg.currentGroupEnd;
                                     } else {
-                                        row.insertCell(2).textContent = "Unknown :P"
+                                        row.insertCell(2).textContent = "Unknown :P";
                                     }
                                 }
                             });
