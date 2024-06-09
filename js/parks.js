@@ -139,8 +139,8 @@ function sortTable(columnIndex) {
         const cellB = rowB.cells[columnIndex].innerText;
 
         if (isNumeric) {
-            const numA = cellA === "N/A" ? 999 : parseInt(cellA);
-            const numB = cellB === "N/A" ? 999 : parseInt(cellB);
+            const numA = parseInt(cellA) || 999;
+            const numB = parseInt(cellB) || 999;
             return sortDirection[columnIndex] === 'asc'
                 ? numA - numB
                 : numB - numA;
