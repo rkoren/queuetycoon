@@ -139,8 +139,10 @@ function sortTable(columnIndex) {
         const cellB = rowB.cells[columnIndex].innerText;
 
         if (isNumeric) {
-            const numA = parseInt(cellA) || 999;
-            const numB = parseInt(cellB) || 999;
+            const parsedA = parseInt(cellA);
+            const parsedB = parseInt(cellB);
+            const numA = Number.isNaN(parsedA) ? 999 : parsedA;
+            const numB = Number.isNaN(parsedB) ? 999 : parsedB;
             return sortDirection[columnIndex] === 'asc'
                 ? numA - numB
                 : numB - numA;
