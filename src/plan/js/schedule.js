@@ -8,11 +8,26 @@ function initializeDatepicker() {
     autoclose: true,
   });
 
+  $("#datepicker").val(formatDate(new Date()));
+
+
   $('#datepicker').on('changeDate', function(e) {
     checkParkSchedule(e.date, currentParkId);
     updateSelectOptions(e.date)
   });
-}  
+}
+
+function formatDate(date) {
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  // adjust to mm
+  var monthStr = month < 10 ? '0' + month : month;
+  var day = date.getDate();
+  // adjust to dd
+  var dayStr = day < 10 ? '0' + day : day;
+  var formattedDate = year + '-' + monthStr + '-' + dayStr;
+  return formattedDate
+}
 
 function checkParkSchedule(date, parkId) {
   var year = date.getFullYear();
