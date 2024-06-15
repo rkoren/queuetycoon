@@ -35,88 +35,91 @@
       </ul>
     </div>
   </nav>
-  <div class="container mt-3">
-    <div class="day-form">
-      <h2>Challenge Mode</h2>
-      <p>
-        Try to find (or beat) QueueTycoon's Trip Planner! Using the form below, select conditions for an ideal day at your chosen park.
-        First, select the preferred park and date/time of your visit. Then, include all rides, attractions, and meals desired for your visit, and assign
-        them an importance point score. Submit these preferences and QueueTycoon will try planning an ideal day based on your parameters!
-      </p>
-      <p>
-        Hit "View QT's Score" or "View QT's plans" to see the best score and routes the Trip Planner came up with! This score is based on your importance ratings so fair warning: these plans might involve some <b><i>unique</i></b> suggestions.
-        After viewing (or not viewing) these choices, see if you can find another plan that matches or beats the Trip Planner's score! Or tweak your preferences and see how these suggestions vary, happy planning!
-      </p>
-    </div>
 
-    <div class="day-form">
-      <label for="selectPark">Select Park:</label>
-      <select class="form-control" id="parkSelect">
-      </select>
-    </div>
+  <main class="flex-grow-1">
+    <div class="container mt-3">
+      <div class="day-form">
+        <h2>Challenge Mode</h2>
+        <p>
+          Try to find (or beat) QueueTycoon's Trip Planner! Using the form below, select conditions for an ideal day at your chosen park.
+          First, select the preferred park and date/time of your visit. Then, include all rides, attractions, and meals desired for your visit, and assign
+          them an importance point score. Submit these preferences and QueueTycoon will try planning an ideal day based on your parameters!
+        </p>
+        <p>
+          Hit "View QT's Score" or "View QT's plans" to see the best score and routes the Trip Planner came up with! This score is based on your importance ratings so fair warning: these plans might involve some <b><i>unique</i></b> suggestions.
+          After viewing (or not viewing) these choices, see if you can find another plan that matches or beats the Trip Planner's score! Or tweak your preferences and see how these suggestions vary, happy planning!
+        </p>
+      </div>
 
-    <div class="day-form">
-      <label for="datepicker">Select Date:</label>
-      <input type="text" class="form-control" id="datepicker" name="datepicker">
-    </div>
-
-    <div class="day-form">
-      <label for="selectPark">Select Queue Data:</label>
-      <select class="form-control" id="dayOfWeekSelect">
-      </select>
-    </div>
-
-    <div class="day-form">
-      <label for="selectPark">Walking Speed:</label>
-      <select class="form-control" id="parkSelect">
-          <option>
-            Leisurely (1.5 mph)
-          </option>
-          <option>
-            Average (3 mph)
-          </option>
-          <option>
-            Aspiring Olympic Speedwalker (6+ mph)
-          </option>
-          <option>
-            Teleport (Walk time ignored)
-          </option>
+      <div class="day-form">
+        <label for="selectPark">Select Park:</label>
+        <select class="form-control" id="parkSelect">
         </select>
-    </div>
+      </div>
 
-    <div class="day-form">
-      <div class="button-row">
-        <button id="assignRidesBtn" >Assign Ride Values</button>
-        <button id="addMealsBtn">Add Meals</button>
-        <button id="addShowsBtn">Add Shows</button>
+      <div class="day-form">
+        <label for="datepicker">Select Date:</label>
+        <input type="text" class="form-control" id="datepicker" name="datepicker">
+      </div>
+
+      <div class="day-form">
+        <label for="selectPark">Select Queue Data:</label>
+        <select class="form-control" id="dayOfWeekSelect">
+        </select>
+      </div>
+
+      <div class="day-form">
+        <label for="selectPark">Walking Speed:</label>
+        <select class="form-control" id="parkSelect">
+            <option>
+              Leisurely (1.5 mph)
+            </option>
+            <option>
+              Average (3 mph)
+            </option>
+            <option>
+              Aspiring Olympic Speedwalker (6+ mph)
+            </option>
+            <option>
+              Teleport (Walk time ignored)
+            </option>
+          </select>
+      </div>
+
+      <div class="day-form">
+        <div class="button-row">
+          <button id="assignRidesBtn" >Assign Ride Values</button>
+          <button id="addMealsBtn">Add Meals</button>
+          <button id="addShowsBtn">Add Shows</button>
+        </div>
+      </div>
+
+      <div id="rideModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Assign Value to Rides (0-10)</h2>
+          <form id="rideForm">
+            <div id="rideList"></div>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="day-form">
+        <label for="selectPark">Entrance Time: </label>
+        <input type="time" name="time">
+      </div>
+
+      <div class="day-form">
+        <label for="selectPark">Exit Time: </label>
+        <input type="time" name="time">
+      </div>
+
+      <div class="day-form">
+        <button type="button" class="btn btn-outline-dark">Submit</button>
       </div>
     </div>
-
-    <div id="rideModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Assign Value to Rides (0-10)</h2>
-        <form id="rideForm">
-          <div id="rideList"></div>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="day-form">
-      <label for="selectPark">Entrance Time: </label>
-      <input type="time" name="time">
-    </div>
-
-    <div class="day-form">
-      <label for="selectPark">Exit Time: </label>
-      <input type="time" name="time">
-    </div>
-
-    <div class="day-form">
-      <button type="button" class="btn btn-outline-dark">Submit</button>
-    </div>
-  </div>
+  </main>
 
   <footer class="bg-dark text-white">
     <div class="container">

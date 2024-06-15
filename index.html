@@ -33,26 +33,29 @@
       </ul>
     </div>
   </nav>
-  <div class="container mt-3">
-    <div class="form-group">
-      <label for="parkSelect">Select Park:</label>
-      <select class="form-control" id="parkSelect">
-      </select>
-      <hr>
-  </div>
-  <div id="table-container" class="table-container">
-    <table class="table table-bordered" id="waitTimeTable">
-      <thead>
-        <tr>
-          <th onclick="sortTable(0)">Name</th>
-          <th onclick="sortTable(1)">Status</th>
-          <th onclick="sortTable(2)">Wait Time</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-  </div>
-</div>
+
+  <main class="flex-grow-1">
+    <div class="container mt-3">
+      <div class="form-group">
+        <label for="parkSelect">Select Park:</label>
+        <select class="form-control" id="parkSelect">
+        </select>
+        <hr>
+      </div>
+      <div id="table-container" class="table-container">
+        <table class="table table-bordered" id="waitTimeTable">
+          <thead>
+            <tr>
+              <th onclick="sortTable(0)">Name</th>
+              <th onclick="sortTable(1)">Status</th>
+              <th onclick="sortTable(2)">Wait Time</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
 
   <footer class="bg-dark text-white">
     <div class="container">

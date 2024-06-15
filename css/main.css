@@ -1,3 +1,18 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+}
+
 .site-footer{
     background:#000;
     padding:2.5rem 0;
@@ -5,7 +20,7 @@
 }
 
 .navbar-brand {
-    padding-left: 20px; /* Adjust the value as needed */
+    padding-left: 20px;
 }
 
 .footer-nav{
