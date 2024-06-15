@@ -103,7 +103,6 @@ function updateSelectOptions(selectedDate) {
   option.text = `Average ${dayOfWeek} (This year)`;
 }
 
-// Listener for datepicker change
 document.getElementById('datepicker').addEventListener('changeDate', function() {
   const selectedDate = this.value;
   console.log(selectedDate);
