@@ -57,29 +57,37 @@ function handleSelectChange() {
 selectElement.addEventListener('change', handleSelectChange);
 getParks();
 
-var modal = document.getElementById("rideModal");
+var rideModal = document.getElementById("rideModal");
+var mealModal = document.getElementById("mealModal");
 var assignRidesBtn = document.getElementById("assignRidesBtn");
 var addMealsBtn = document.getElementById("addMealsBtn");
 var addShowsBtn = document.getElementById("addShowsBtn");
 
-// <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var rideSpan = document.getElementsByClassName("close")[0];
+var mealSpan = document.getElementsByClassName("close")[1];
 
-// open the modal onclick
 assignRidesBtn.onclick = function() {
     populateRideForm(currentParkId);
-    modal.style.display = "block";
+    rideModal.style.display = "block";
 }
 
-// close the modal on span click
-span.onclick = function() {
-    modal.style.display = "none";
+addMealsBtn.onclick = function() {
+    mealModal.style.display = "block";
 }
 
-// close the modal when the user clicks anywhere outside of the modal
+rideSpan.onclick = function() {
+    rideModal.style.display = "none";
+}
+
+mealSpan.onclick = function() {
+    mealModal.style.display = "none";
+}
+
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == rideModal) {
+        rideModal.style.display = "none";
+    } else if (event.target == mealModal) {
+        mealModal.style.display = "none";
     }
 }
 
@@ -88,14 +96,14 @@ function populateRideForm(currentParkId) {
     .then(response => response.json())
     .then(data => {
         console.log('Fetched Data:', data);
-        createForm(data);
+        createRideForm(data);
     })
     .catch(error => {
         console.error('Error fetching data:', error);
     });
 }
 
-function createForm(rideData) {
+function createRideForm(rideData) {
     const formContent = document.getElementById('rideList');
     formContent.innerHTML = '';
 
@@ -146,7 +154,7 @@ function createForm(rideData) {
     }
 }
 
-// submit form
+// submit Ride Form
 document.getElementById("rideForm").onsubmit = function(event) {
     event.preventDefault();
     var formData = new FormData(this);
@@ -156,25 +164,33 @@ document.getElementById("rideForm").onsubmit = function(event) {
     });
     console.log("Form Data Submitted: ", rides);
 
-    // save the form data to local storage or send it to a server
     localStorage.setItem("rideAssignments", JSON.stringify(rides));
+    rideModal.style.display = "none";
+}
 
-    // close the modal
-    modal.style.display = "none";
+// submit Meal Form
+document.getElementById("mealForm").onsubmit = function(event) {
+    event.preventDefault();
+    var formData = new FormData(this);
+    var meals = {};
+    formData.forEach((value, key) => {
+        meals[key] = value;
+    });
+    console.log("Form Data Submitted: ", meals);
+    
+    localStorage.setItem("mealAssignments", JSON.stringify(meals));
+    mealModal.style.display = "none";
 }
 
 // load form data if available
 window.onload = function() {
     var savedRides = JSON.parse(localStorage.getItem("rideAssignments"));
+    var savedMeals = JSON.parse(localStorage.getItem("mealAssignments"))
     if (savedRides) {
         for (const [key, value] of Object.entries(savedRides)) {
             document.getElementById(key).value = value;
         }
     }
-}
-
-addMealsBtn.onclick = function() {
-    alert("Add Meals functionality to be implemented");
 }
 
 addShowsBtn.onclick = function() {
