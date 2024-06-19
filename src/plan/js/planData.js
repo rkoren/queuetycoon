@@ -168,6 +168,17 @@ document.getElementById("rideForm").onsubmit = function(event) {
     rideModal.style.display = "none";
 }
 
+function createMealForm(parkData) {
+    const formContent = document.getElementById('foodList');
+    formContent.innerHTML = '';
+
+    const rowContainer = document.createElement('div');
+    rowContainer.className = 'row-container';
+    formContent.appendChild(rowContainer);
+
+    const restaurants = parkData.children.filter(child => child.entityType === "RESTAURANT");
+}
+
 // submit Meal Form
 document.getElementById("mealForm").onsubmit = function(event) {
     event.preventDefault();
