@@ -172,9 +172,9 @@ function createMealForm(parkData) {
     const formContent = document.getElementById('foodList');
     formContent.innerHTML = '';
 
-    const rowContainer = document.createElement('div');
-    rowContainer.className = 'row-container';
-    formContent.appendChild(rowContainer);
+    const mealContainer = document.createElement('div');
+    mealContainer.className = 'meal-container';
+    formContent.appendChild(mealContainer);  
 
     const restaurants = parkData.children.filter(child => child.entityType === "RESTAURANT");
 }
