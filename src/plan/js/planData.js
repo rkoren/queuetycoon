@@ -174,24 +174,55 @@ function createMealForm(parkData) {
 
     const mealContainer = document.createElement('div');
     mealContainer.className = 'meal-container';
-    formContent.appendChild(mealContainer);  
-
-    const restaurants = parkData.children.filter(child => child.entityType === "RESTAURANT");
+    formContent.appendChild(mealContainer);
 }
 
-// submit Meal Form
-document.getElementById("mealForm").onsubmit = function(event) {
-    event.preventDefault();
-    var formData = new FormData(this);
-    var meals = {};
-    formData.forEach((value, key) => {
-        meals[key] = value;
-    });
-    console.log("Form Data Submitted: ", meals);
-    
-    localStorage.setItem("mealAssignments", JSON.stringify(meals));
-    mealModal.style.display = "none";
+const maxMeals = 7;
+let mealCount = 0;
+
+const restaurants = [
+    'Restaurant 1',
+    'Restaurant 2',
+    'Restaurant 3'
+];
+
+function addMeal() {
+    if (mealCount >= maxMeals) {
+        alert("Whoa I think that's enough for today");
+        return;
+    }
+
+    const mealContainer = document.getElementById('mealContainer');
+    const mealDiv = document.createElement('div');
+    mealDiv.classList.add('meal-entry', 'mb-3');
+    mealDiv.innerHTML = `
+        <label for="restaurantSelect_${mealCount}">Restaurant:</label>
+        <select class="form-control mb-2" id="restaurantSelect_${mealCount}">
+            ${restaurants.map(restaurant => `<option value="${restaurant}">${restaurant}</option>`).join('')}
+        </select>
+        <label for="time_${mealCount}">Time:</label>
+        <input class="form-control mb-2" type="time" id="time_${mealCount}" />
+        <label for="duration_${mealCount}">Duration (minutes):</label>
+        <input class="form-control mb-2" type="number" id="duration_${mealCount}" min="1" />
+    `;
+
+    mealContainer.appendChild(mealDiv);
+    mealCount++;
 }
+
+document.getElementById('addMealButton').addEventListener('click', addMeal);
+
+document.getElementById('submitMealsButton').addEventListener('click', () => {
+    const meals = [];
+    for (let i = 0; i < mealCount; i++) {
+        const restaurant = document.getElementById(`restaurantSelect_${i}`).value;
+        const time = document.getElementById(`time_${i}`).value;
+        const duration = document.getElementById(`duration_${i}`).value;
+        meals.push({ restaurant, time, duration });
+    }
+    console.log('Submitted meals:', meals);
+});
+
 
 // load form data if available
 window.onload = function() {
