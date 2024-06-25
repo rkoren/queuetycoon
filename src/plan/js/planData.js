@@ -73,6 +73,7 @@ assignRidesBtn.onclick = function() {
 
 addMealsBtn.onclick = function() {
     mealModal.style.display = "block";
+    addMeal();
 }
 
 rideSpan.onclick = function() {
