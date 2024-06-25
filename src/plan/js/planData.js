@@ -178,7 +178,7 @@ function createMealForm(parkData) {
     formContent.appendChild(mealContainer);
 }
 
-const maxMeals = 7;
+const maxMeals = 6;
 let mealCount = 0;
 
 const restaurants = [
@@ -189,7 +189,7 @@ const restaurants = [
 
 function addMeal() {
     if (mealCount >= maxMeals) {
-        alert("Whoa I think that's enough for today");
+        alert("Whoa, I think that's meals enough for today");
         return;
     }
 
@@ -200,11 +200,13 @@ function addMeal() {
         <label for="restaurantSelect_${mealCount}">Restaurant:</label>
         <select class="form-control mb-2" id="restaurantSelect_${mealCount}">
             ${restaurants.map(restaurant => `<option value="${restaurant}">${restaurant}</option>`).join('')}
+            <option value="custom">Other</option>
         </select>
         <label for="time_${mealCount}">Time:</label>
         <input class="form-control mb-2" type="time" id="time_${mealCount}" />
         <label for="duration_${mealCount}">Duration (minutes):</label>
-        <input class="form-control mb-2" type="number" id="duration_${mealCount}" min="1" />
+        <input class="form-control mb-2" type="number" id="duration_${mealCount}" min="0" max="120"/>
+        <hr>
     `;
 
     mealContainer.appendChild(mealDiv);
