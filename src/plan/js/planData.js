@@ -206,10 +206,17 @@ function addMeal() {
         <input class="form-control mb-2" type="time" id="time_${mealCount}" />
         <label for="duration_${mealCount}">Duration (minutes):</label>
         <input class="form-control mb-2" type="number" id="duration_${mealCount}" min="0" max="120"/>
+        <button type="button" class="btn btn-danger removeMealButton">Remove</button>
         <hr>
     `;
-
+    
     mealContainer.appendChild(mealDiv);
+
+    mealDiv.querySelector('.removeMealButton').addEventListener('click', function() {
+        mealDiv.remove();
+        mealCount--;
+    });
+
     mealCount++;
 }
 
