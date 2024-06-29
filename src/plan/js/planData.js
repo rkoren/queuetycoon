@@ -52,6 +52,7 @@ function handleSelectChange() {
     localStorage.setItem('selectedParkId', selectedParkId);
     currentParkId = selectedParkId;
     populateRideForm(currentParkId);
+    populateMealForm(currentParkId);
 }
 
 selectElement.addEventListener('change', handleSelectChange);
@@ -155,7 +156,6 @@ function createRideForm(rideData) {
     }
 }
 
-// submit Ride Form
 document.getElementById("rideForm").onsubmit = function(event) {
     event.preventDefault();
     var formData = new FormData(this);
@@ -169,6 +169,18 @@ document.getElementById("rideForm").onsubmit = function(event) {
     rideModal.style.display = "none";
 }
 
+function populateMealForm(currentParkId) {
+    fetch(`https://api.themeparks.wiki/v1/entity/${currentParkId}/children`)
+    .then(response => response.json())
+    .then(data => {
+        console.log('Fetched Data:', data);
+        createMealForm(data);
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
+
 function createMealForm(parkData) {
     const formContent = document.getElementById('foodList');
     formContent.innerHTML = '';
@@ -176,12 +188,16 @@ function createMealForm(parkData) {
     const mealContainer = document.createElement('div');
     mealContainer.className = 'meal-container';
     formContent.appendChild(mealContainer);
+
+    var restaurants = parkData.children
+        .filter(child => child.entityType === 'RESTAURANT')
+        .map(restaurant => restaurant.name);
 }
 
 const maxMeals = 6;
 let mealCount = 0;
 
-const restaurants = [
+var restaurants = [
     'Restaurant 1',
     'Restaurant 2',
     'Restaurant 3'
