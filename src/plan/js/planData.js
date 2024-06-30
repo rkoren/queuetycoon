@@ -1,5 +1,6 @@
 const selectElement = document.getElementById('parkSelect');
 const tableBody = document.getElementById('tableBody');
+const addMealButton = document.getElementById('addMealButton');
 
 function getParks() {
     if (selectElement.childElementCount === 0) {
@@ -61,7 +62,7 @@ getParks();
 var rideModal = document.getElementById("rideModal");
 var mealModal = document.getElementById("mealModal");
 var assignRidesBtn = document.getElementById("assignRidesBtn");
-var addMealsBtn = document.getElementById("addMealsBtn");
+var mealsModalBtn = document.getElementById("mealsModalBtn");
 var addShowsBtn = document.getElementById("addShowsBtn");
 
 var rideSpan = document.getElementsByClassName("close")[0];
@@ -72,9 +73,8 @@ assignRidesBtn.onclick = function() {
     rideModal.style.display = "block";
 }
 
-addMealsBtn.onclick = function() {
+mealsModalBtn.onclick = function() {
     mealModal.style.display = "block";
-    addMeal();
 }
 
 rideSpan.onclick = function() {
@@ -182,26 +182,24 @@ function populateMealForm(currentParkId) {
 }
 
 function createMealForm(parkData) {
-    const formContent = document.getElementById('foodList');
+    const formContent = document.getElementById('mealContainer');
     formContent.innerHTML = '';
 
     const mealContainer = document.createElement('div');
     mealContainer.className = 'meal-container';
     formContent.appendChild(mealContainer);
 
-    var restaurants = parkData.children
+    restaurants = parkData.children
         .filter(child => child.entityType === 'RESTAURANT')
         .map(restaurant => restaurant.name);
+
+    console.log('Populated restaurants:', restaurants);
 }
 
 const maxMeals = 6;
 let mealCount = 0;
 
-var restaurants = [
-    'Restaurant 1',
-    'Restaurant 2',
-    'Restaurant 3'
-];
+var restaurants = [];
 
 function addMeal() {
     if (mealCount >= maxMeals) {
@@ -247,10 +245,10 @@ document.getElementById('submitMealsButton').addEventListener('click', () => {
         meals.push({ restaurant, time, duration });
     }
     console.log('Submitted meals:', meals);
+    localStorage.setItem("mealAssignments", JSON.stringify(meals));
+    mealModal.style.display = "none";
 });
 
-
-// load form data if available
 window.onload = function() {
     var savedRides = JSON.parse(localStorage.getItem("rideAssignments"));
     var savedMeals = JSON.parse(localStorage.getItem("mealAssignments"))
@@ -258,6 +256,14 @@ window.onload = function() {
         for (const [key, value] of Object.entries(savedRides)) {
             document.getElementById(key).value = value;
         }
+    }
+    if (savedMeals) {
+        savedMeals.forEach((meal, index) => {
+            addMeal();
+            document.getElementById(`restaurantSelect_${index}`).value = meal.restaurant;
+            document.getElementById(`time_${index}`).value = meal.time;
+            document.getElementById(`duration_${index}`).value = meal.duration;
+        });
     }
 }
 
