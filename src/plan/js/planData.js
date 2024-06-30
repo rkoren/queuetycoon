@@ -63,7 +63,7 @@ var rideModal = document.getElementById("rideModal");
 var mealModal = document.getElementById("mealModal");
 var assignRidesBtn = document.getElementById("assignRidesBtn");
 var mealsModalBtn = document.getElementById("mealsModalBtn");
-var addShowsBtn = document.getElementById("addShowsBtn");
+var showsModalBtn = document.getElementById("showsModalBtn");
 
 var rideSpan = document.getElementsByClassName("close")[0];
 var mealSpan = document.getElementsByClassName("close")[1];
@@ -267,6 +267,6 @@ window.onload = function() {
     }
 }
 
-addShowsBtn.onclick = function() {
+showsModalBtn.onclick = function() {
     alert("Add Shows functionality to be implemented");
 }
