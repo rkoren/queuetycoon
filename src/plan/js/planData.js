@@ -74,6 +74,7 @@ assignRidesBtn.onclick = function() {
 }
 
 mealsModalBtn.onclick = function() {
+    populateMealForm(currentParkId);
     mealModal.style.display = "block";
 }
 
