@@ -213,14 +213,14 @@ function addMeal() {
     mealDiv.classList.add('meal-entry', 'mb-3');
     mealDiv.innerHTML = `
         <label for="restaurantSelect_${mealCount}">Restaurant:</label>
-        <select class="form-control mb-2" id="restaurantSelect_${mealCount}">
+        <select class="form-control mb-6" id="restaurantSelect_${mealCount}">
             ${restaurants.map(restaurant => `<option value="${restaurant}">${restaurant}</option>`).join('')}
             <option value="custom">Other</option>
         </select>
         <label for="time_${mealCount}">Time:</label>
-        <input class="form-control mb-2" type="time" id="time_${mealCount}" />
+        <input class="form-control mb-6" type="time" id="time_${mealCount}" />
         <label for="duration_${mealCount}">Duration (minutes):</label>
-        <input class="form-control mb-2" type="number" id="duration_${mealCount}" min="0" max="120"/>
+        <input class="form-control mb-6" type="number" id="duration_${mealCount}" value="60" min="0" max="120"/>
         <button type="button" class="btn btn-danger removeMealButton">Remove</button>
         <hr>
     `;
