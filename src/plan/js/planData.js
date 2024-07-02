@@ -238,15 +238,45 @@ document.getElementById('addMealButton').addEventListener('click', addMeal);
 
 document.getElementById('submitMealsButton').addEventListener('click', () => {
     const meals = [];
+    let isValid = true;
+    let errorMessage = '';
+
     for (let i = 0; i < mealCount; i++) {
         const restaurant = document.getElementById(`restaurantSelect_${i}`).value;
         const time = document.getElementById(`time_${i}`).value;
         const duration = document.getElementById(`duration_${i}`).value;
+
+        if (!restaurant || !time || !duration) {
+            isValid = false;
+            errorMessage = 'All fields must be filled out.';
+            break;
+        }
+
+        const startTime = new Date(`1970-01-01T${time}:00Z`).getTime();
+        const endTime = startTime + duration * 60 * 1000;
+
+        for (const meal of meals) {
+            const existingStartTime = new Date(`1970-01-01T${meal.time}:00Z`).getTime();
+            const existingEndTime = existingStartTime + meal.duration * 60 * 1000;
+
+            if ((startTime < existingEndTime && startTime >= existingStartTime) || (endTime <= existingEndTime && endTime > existingStartTime)) {
+                isValid = false;
+                errorMessage = 'Meal times cannot overlap.';
+                break;
+            }
+        }
+
+        if (!isValid) break;
         meals.push({ restaurant, time, duration });
     }
-    console.log('Submitted meals:', meals);
-    localStorage.setItem("mealAssignments", JSON.stringify(meals));
-    mealModal.style.display = "none";
+
+    if (isValid) {
+        console.log('Submitted meals:', meals);
+        localStorage.setItem("mealAssignments", JSON.stringify(meals));
+        mealModal.style.display = "none";
+    } else {
+        alert(errorMessage);
+    }
 });
 
 window.onload = function() {
