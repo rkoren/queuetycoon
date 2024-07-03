@@ -83,6 +83,8 @@ rideSpan.onclick = function() {
 }
 
 mealSpan.onclick = function() {
+    mealCount = 0;
+    document.getElementById('mealContainer').innerHTML = '';
     mealModal.style.display = "none";
 }
 
@@ -90,6 +92,8 @@ window.onclick = function(event) {
     if (event.target == rideModal) {
         rideModal.style.display = "none";
     } else if (event.target == mealModal) {
+        mealCount = 0;
+        document.getElementById('mealContainer').innerHTML = '';
         mealModal.style.display = "none";
     }
 }
