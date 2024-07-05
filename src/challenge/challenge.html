@@ -78,7 +78,7 @@
             Average (3 mph)
           </option>
           <option>
-            Aspiring Olympic Speedwalker (6+ mph)
+            Speedwalker (6+ mph)
           </option>
         </select>
       </div>
@@ -88,17 +88,6 @@
           <button class="btn btn-outline-dark" id="assignRidesBtn" >Assign Ride Values</button>
           <button class="btn btn-outline-dark" id="mealsModalBtn">Add Meals</button>
           <button class="btn btn-outline-dark" id="showsModalBtn">Add Shows</button>
-        </div>
-      </div>
-
-      <div id="rideModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>Assign Value to Rides (0-10)</h2>
-          <form id="rideForm">
-            <div id="rideList"></div>
-            <button type="submit">Submit</button>
-          </form>
         </div>
       </div>
 
@@ -116,9 +105,38 @@
         <button type="button" class="btn btn-outline-dark">Submit</button>
       </div>
     </div>
+
+    <div id="rideModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Assign Value to Rides (0-10)</h2>
+        <form id="rideForm">
+          <div id="rideList"></div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="mealModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-header">
+          <h5 class="modal-title">Add Meals</h5>
+        </div>
+        <div class="modal-body">
+          <form id="mealForm">
+            <div id="mealContainer"></div>
+            <button type="button" class="btn btn-outline-dark" id="addMealButton">Add Meal</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" id="submitMealsButton">Submit</button>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <footer class="bg-dark text-white">
+  <footer class="bg-dark text-white mt-auto">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
