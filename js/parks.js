@@ -141,8 +141,8 @@ function sortTable(columnIndex) {
         if (isNumeric) {
             const parsedA = parseInt(cellA);
             const parsedB = parseInt(cellB);
-            const numA = Number.isNaN(parsedA) ? 999 : parsedA;
-            const numB = Number.isNaN(parsedB) ? 999 : parsedB;
+            const numA = Number.isNaN(parsedA) ? -1 : parsedA;
+            const numB = Number.isNaN(parsedB) ? -1 : parsedB;
             return sortDirection[columnIndex] === 'asc'
                 ? numA - numB
                 : numB - numA;
