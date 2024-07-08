@@ -1,6 +1,7 @@
 const selectElement = document.getElementById('parkSelect');
 const tableBody = document.getElementById('tableBody');
 const addMealButton = document.getElementById('addMealButton');
+const addShowButton = document.getElementById('addShowButton');
 
 function getParks() {
     if (selectElement.childElementCount === 0) {
@@ -54,6 +55,7 @@ function handleSelectChange() {
     currentParkId = selectedParkId;
     populateRideForm(currentParkId);
     populateMealForm(currentParkId);
+    populateShowForm(currentParkId);
 }
 
 selectElement.addEventListener('change', handleSelectChange);
@@ -61,12 +63,14 @@ getParks();
 
 var rideModal = document.getElementById("rideModal");
 var mealModal = document.getElementById("mealModal");
+var showModal = document.getElementById("showModal");
 var assignRidesBtn = document.getElementById("assignRidesBtn");
 var mealsModalBtn = document.getElementById("mealsModalBtn");
 var showsModalBtn = document.getElementById("showsModalBtn");
 
 var rideSpan = document.getElementsByClassName("close")[0];
 var mealSpan = document.getElementsByClassName("close")[1];
+var showSpan = document.getElementsByClassName("close")[2];
 
 assignRidesBtn.onclick = function() {
     populateRideForm(currentParkId);
@@ -74,6 +78,11 @@ assignRidesBtn.onclick = function() {
 }
 
 mealsModalBtn.onclick = function() {
+    populateMealForm(currentParkId);
+    mealModal.style.display = "block";
+}
+
+showsModalBtn.onclick = function() {
     populateMealForm(currentParkId);
     mealModal.style.display = "block";
 }
@@ -88,6 +97,12 @@ mealSpan.onclick = function() {
     mealModal.style.display = "none";
 }
 
+showSpan.onclick = function() {
+    showCount = 0;
+    document.getElementById('showContainer').innerHTML = '';
+    showModal.style.display = "none";
+}
+
 window.onclick = function(event) {
     if (event.target == rideModal) {
         rideModal.style.display = "none";
@@ -95,6 +110,9 @@ window.onclick = function(event) {
         mealCount = 0;
         document.getElementById('mealContainer').innerHTML = '';
         mealModal.style.display = "none";
+    } else if (event.target == showModal) {
+        showcount = 0;
+        document.getElementById('showContainer').innerHTML = '';
     }
 }
 
@@ -284,9 +302,120 @@ document.getElementById('submitMealsButton').addEventListener('click', () => {
     }
 });
 
+function populateMealForm(currentParkId) {
+    fetch(`https://api.themeparks.wiki/v1/entity/${currentParkId}/children`)
+    .then(response => response.json())
+    .then(data => {
+        console.log('Fetched Data:', data);
+        createMealForm(data);
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
+
+function createMealForm(parkData) {
+    const formContent = document.getElementById('mealContainer');
+    formContent.innerHTML = '';
+
+    const mealContainer = document.createElement('div');
+    mealContainer.className = 'meal-container';
+    formContent.appendChild(mealContainer);
+
+    restaurants = parkData.children
+        .filter(child => child.entityType === 'RESTAURANT')
+        .map(restaurant => restaurant.name);
+
+    console.log('Populated restaurants:', restaurants);
+}
+
+const maxShows = 6;
+let showCount = 0;
+
+var shows = [];
+
+function addShow() {
+    if (showCount >= maxShows) {
+        alert("Maybe save some time for rides? ");
+        return;
+    }
+
+    const showContainer = document.getElementById('showContainer');
+    const showDiv = document.createElement('div');
+    showDiv.classList.add('show-entry', 'mb-3');
+    showDiv.innerHTML = `
+        <label for="showSelect_${showCount}">Show:</label>
+        <select class="form-control mb-6" id="showSelect_${showCount}">
+            ${shows.map(show => `<option value="${show}">${show}</option>`).join('')}
+            <option value="custom">Other</option>
+        </select>
+        <label for="time_${showCount}">Time:</label>
+        <input class="form-control mb-6" type="time" id="time_${showCount}" />
+        <label for="duration_${showCount}">Duration (minutes):</label>
+        <input class="form-control mb-6" type="number" id="duration_${showCount}" value="60" min="0" max="120"/>
+        <button type="button" class="btn btn-danger removeShowButton">Remove</button>
+        <hr>
+    `;
+    
+    showContainer.appendChild(showDiv);
+
+    showDiv.querySelector('.removeShowButton').addEventListener('click', function() {
+        showDiv.remove();
+        showCount--;
+    });
+
+    showCount++;
+}
+
+document.getElementById('addShowButton').addEventListener('click', addShow);
+
+document.getElementById('submitShowsButton').addEventListener('click', () => {
+    const shows = [];
+    let isValid = true;
+    let errorMessage = '';
+
+    for (let i = 0; i < showCount; i++) {
+        const show = document.getElementById(`showSelect_${i}`).value;
+        const time = document.getElementById(`time_${i}`).value;
+        const duration = document.getElementById(`duration_${i}`).value;
+
+        if (!show || !time || !duration) {
+            isValid = false;
+            errorMessage = 'All fields must be filled out.';
+            break;
+        }
+
+        const startTime = new Date(`1970-01-01T${time}:00Z`).getTime();
+        const endTime = startTime + duration * 60 * 1000;
+
+        for (const show of shows) {
+            const existingStartTime = new Date(`1970-01-01T${show.time}:00Z`).getTime();
+            const existingEndTime = existingStartTime + show.duration * 60 * 1000;
+
+            if ((startTime < existingEndTime && startTime >= existingStartTime) || (endTime <= existingEndTime && endTime > existingStartTime)) {
+                isValid = false;
+                errorMessage = 'Show times cannot overlap.';
+                break;
+            }
+        }
+
+        if (!isValid) break;
+        shows.push({ show, time, duration });
+    }
+
+    if (isValid) {
+        console.log('Submitted shows:', shows);
+        localStorage.setItem("showAssignments", JSON.stringify(shows));
+        showModal.style.display = "none";
+    } else {
+        alert(errorMessage);
+    }
+});
+
 window.onload = function() {
     var savedRides = JSON.parse(localStorage.getItem("rideAssignments"));
-    var savedMeals = JSON.parse(localStorage.getItem("mealAssignments"))
+    var savedMeals = JSON.parse(localStorage.getItem("mealAssignments"));
+    var savedShow = JSON.parse(localStorage.getItem("showAssignments"));
     if (savedRides) {
         for (const [key, value] of Object.entries(savedRides)) {
             document.getElementById(key).value = value;
@@ -300,8 +429,12 @@ window.onload = function() {
             document.getElementById(`duration_${index}`).value = meal.duration;
         });
     }
-}
-
-showsModalBtn.onclick = function() {
-    alert("Add Shows functionality to be implemented");
+    if (savedShows) {
+        savedShows.forEach((show, index) => {
+            addShow();
+            document.getElementById(`showSelect_${index}`).value = show.restaurant;
+            document.getElementById(`time_${index}`).value = show.time;
+            document.getElementById(`duration_${index}`).value = show.duration;
+        });
+    }
 }
