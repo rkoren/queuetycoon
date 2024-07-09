@@ -83,8 +83,8 @@ mealsModalBtn.onclick = function() {
 }
 
 showsModalBtn.onclick = function() {
-    populateMealForm(currentParkId);
-    mealModal.style.display = "block";
+    populateShowForm(currentParkId);
+    showModal.style.display = "block";
 }
 
 rideSpan.onclick = function() {
@@ -113,6 +113,7 @@ window.onclick = function(event) {
     } else if (event.target == showModal) {
         showcount = 0;
         document.getElementById('showContainer').innerHTML = '';
+        showModal.style.display = "none";
     }
 }
 
@@ -242,7 +243,7 @@ function addMeal() {
         <label for="time_${mealCount}">Time:</label>
         <input class="form-control mb-6" type="time" id="time_${mealCount}" />
         <label for="duration_${mealCount}">Duration (minutes):</label>
-        <input class="form-control mb-6" type="number" id="duration_${mealCount}" value="60" min="0" max="120"/>
+        <input class="form-control mb-6" type="number" id="duration_${mealCount}" value="60" min="5" max="120"/>
         <button type="button" class="btn btn-danger removeMealButton">Remove</button>
         <hr>
     `;
@@ -302,34 +303,34 @@ document.getElementById('submitMealsButton').addEventListener('click', () => {
     }
 });
 
-function populateMealForm(currentParkId) {
+function populateShowForm(currentParkId) {
     fetch(`https://api.themeparks.wiki/v1/entity/${currentParkId}/children`)
     .then(response => response.json())
     .then(data => {
         console.log('Fetched Data:', data);
-        createMealForm(data);
+        createShowForm(data);
     })
     .catch(error => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching show data:', error);
     });
 }
 
-function createMealForm(parkData) {
-    const formContent = document.getElementById('mealContainer');
+function createShowForm(parkData) {
+    const formContent = document.getElementById('showContainer');
     formContent.innerHTML = '';
 
-    const mealContainer = document.createElement('div');
-    mealContainer.className = 'meal-container';
-    formContent.appendChild(mealContainer);
+    const showContainer = document.createElement('div');
+    showContainer.className = 'meal-container';
+    formContent.appendChild(showContainer);
 
-    restaurants = parkData.children
-        .filter(child => child.entityType === 'RESTAURANT')
-        .map(restaurant => restaurant.name);
+    shows = parkData.children
+        .filter(child => child.entityType === 'SHOW')
+        .map(show => show.name);
 
-    console.log('Populated restaurants:', restaurants);
+    console.log('Populated restaurants:', shows);
 }
 
-const maxShows = 6;
+const maxShows = 15;
 let showCount = 0;
 
 var shows = [];
@@ -352,7 +353,7 @@ function addShow() {
         <label for="time_${showCount}">Time:</label>
         <input class="form-control mb-6" type="time" id="time_${showCount}" />
         <label for="duration_${showCount}">Duration (minutes):</label>
-        <input class="form-control mb-6" type="number" id="duration_${showCount}" value="60" min="0" max="120"/>
+        <input class="form-control mb-6" type="number" id="duration_${showCount}" value="60" min="5" max="120"/>
         <button type="button" class="btn btn-danger removeShowButton">Remove</button>
         <hr>
     `;
@@ -415,7 +416,7 @@ document.getElementById('submitShowsButton').addEventListener('click', () => {
 window.onload = function() {
     var savedRides = JSON.parse(localStorage.getItem("rideAssignments"));
     var savedMeals = JSON.parse(localStorage.getItem("mealAssignments"));
-    var savedShow = JSON.parse(localStorage.getItem("showAssignments"));
+    var savedShows = JSON.parse(localStorage.getItem("showAssignments"));
     if (savedRides) {
         for (const [key, value] of Object.entries(savedRides)) {
             document.getElementById(key).value = value;
