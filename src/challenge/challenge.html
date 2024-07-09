@@ -41,96 +41,21 @@
       <div class="day-form">
         <h2>Challenge Mode</h2>
         <p>
-          Try to collect as many credits as you can on a given day! Similar to the planning page, select conditions for an ideal day at your chosen park and see if you can collect every credit in the park!
+          Given a semi-random day, try to collect as many coaster credits as you can! Challenges may also have meal/show/non-coaster requirements for you to work around.
         </p>
         <p>
-          After submitting, QT's trip planner will display the highest number of credits it was able to collect given the data/input provided. Check out this plan or see if you can find a better one!
+          After submitting, QT will reveal its best possible time, which you can view or try to find. Come back daily for a new challenge or hit "Surprise Me" for a random challenge!
         </p>
       </div>
-
-      <div class="day-form">
-        <label for="selectPark">Select Park:</label>
-        <select class="form-control" id="parkSelect">
-        </select>
-      </div>
-
-      <div class="day-form">
-        <label for="datepicker">Select Date:</label>
-        <input type="text" class="form-control" id="datepicker" name="datepicker">
-      </div>
-
-      <div class="day-form">
-        <label for="selectPark">Select Queue Data:</label>
-        <select class="form-control" id="dayOfWeekSelect">
-        </select>
-      </div>
-
-      <div class="day-form">
-        <label for="selectPark">Walking Speed:</label>
-        <select class="form-control" id="parkSelect">
-          <option selected="selected">
-            Teleport (Walk time ignored)
-          </option>
-          <option>
-            Leisurely (1.5 mph)
-          </option>
-          <option>
-            Average (3 mph)
-          </option>
-          <option>
-            Speedwalker (6+ mph)
-          </option>
-        </select>
-      </div>
+      
+      <h3>Today's Challenge:</h3>
+      <hr>
+      
+      <p>Coming Soon!</p>
 
       <div class="day-form">
         <div class="button-row">
-          <button class="btn btn-outline-dark" id="assignRidesBtn" >Assign Ride Values</button>
-          <button class="btn btn-outline-dark" id="mealsModalBtn">Add Meals</button>
-          <button class="btn btn-outline-dark" id="showsModalBtn">Add Shows</button>
-        </div>
-      </div>
-
-      <div class="day-form">
-        <label for="selectPark">Entrance Time: </label>
-        <input type="time" name="time">
-      </div>
-
-      <div class="day-form">
-        <label for="selectPark">Exit Time: </label>
-        <input type="time" name="time">
-      </div>
-
-      <div class="day-form">
-        <button type="button" class="btn btn-outline-dark">Submit</button>
-      </div>
-    </div>
-
-    <div id="rideModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Assign Value to Rides (0-10)</h2>
-        <form id="rideForm">
-          <div id="rideList"></div>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
-
-    <div id="mealModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="modal-header">
-          <h5 class="modal-title">Add Meals</h5>
-        </div>
-        <div class="modal-body">
-          <form id="mealForm">
-            <div id="mealContainer"></div>
-            <button type="button" class="btn btn-outline-dark" id="addMealButton">Add Meal</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" id="submitMealsButton">Submit</button>
+          <button class="btn btn-outline-dark" id="surpriseBtn" >Surprise Me!</button>
         </div>
       </div>
     </div>
@@ -151,7 +76,5 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="/src/plan/js/schedule.js"></script>
-  <script src="/src/plan/js/planData.js"></script>
 </body>
 </html>
