@@ -111,7 +111,7 @@ window.onclick = function(event) {
         document.getElementById('mealContainer').innerHTML = '';
         mealModal.style.display = "none";
     } else if (event.target == showModal) {
-        showcount = 0;
+        showCount = 0;
         document.getElementById('showContainer').innerHTML = '';
         showModal.style.display = "none";
     }
@@ -235,17 +235,29 @@ function addMeal() {
     const mealDiv = document.createElement('div');
     mealDiv.classList.add('meal-entry', 'mb-3');
     mealDiv.innerHTML = `
-        <label for="restaurantSelect_${mealCount}">Restaurant:</label>
-        <select class="form-control mb-6" id="restaurantSelect_${mealCount}">
-            ${restaurants.map(restaurant => `<option value="${restaurant}">${restaurant}</option>`).join('')}
-            <option value="custom">Other</option>
-        </select>
-        <label for="time_${mealCount}">Time:</label>
-        <input class="form-control mb-6" type="time" id="time_${mealCount}" />
-        <label for="duration_${mealCount}">Duration (minutes):</label>
-        <input class="form-control mb-6" type="number" id="duration_${mealCount}" value="60" min="5" max="120"/>
-        <button type="button" class="btn btn-danger removeMealButton">Remove</button>
-        <hr>
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label for="restaurantSelect_${mealCount}">Restaurant:</label>
+            <select id="restaurantSelect_${mealCount}" class="form-control">
+                ${restaurants.map(restaurant => `<option value="${restaurant}">${restaurant}</option>`).join('')}
+                <option value="custom">Other</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label for="time_${mealCount}">Time:</label>
+            <input type="time" id="time_${mealCount}" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label for="duration_${mealCount}">Duration (minutes):</label>
+            <input type="number" id="duration_${mealCount}" class="form-control" value="60" min="5" max="120"/>
+        </div>
+    </div>
+    <button type="button" class="btn btn-danger removeMealButton">Remove</button>
+    <hr>
     `;
     
     mealContainer.appendChild(mealDiv);
@@ -320,7 +332,7 @@ function createShowForm(parkData) {
     formContent.innerHTML = '';
 
     const showContainer = document.createElement('div');
-    showContainer.className = 'meal-container';
+    showContainer.className = 'show-container';
     formContent.appendChild(showContainer);
 
     shows = parkData.children
@@ -345,19 +357,30 @@ function addShow() {
     const showDiv = document.createElement('div');
     showDiv.classList.add('show-entry', 'mb-3');
     showDiv.innerHTML = `
-        <label for="showSelect_${showCount}">Show:</label>
-        <select class="form-control mb-6" id="showSelect_${showCount}">
-            ${shows.map(show => `<option value="${show}">${show}</option>`).join('')}
-            <option value="custom">Other</option>
-        </select>
-        <label for="time_${showCount}">Time:</label>
-        <input class="form-control mb-6" type="time" id="time_${showCount}" />
-        <label for="duration_${showCount}">Duration (minutes):</label>
-        <input class="form-control mb-6" type="number" id="duration_${showCount}" value="60" min="5" max="120"/>
-        <button type="button" class="btn btn-danger removeShowButton">Remove</button>
-        <hr>
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label for="showSelect_${showCount}">Show:</label>
+            <select id="restaurantSelect_${showCount}" class="form-control">
+                ${shows.map(show => `<option value="${show}">${show}</option>`).join('')}
+                <option value="custom">Other</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label for="time_${showCount}">Time:</label>
+            <input type="time" id="time_${showCount}" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label for="duration_${showCount}">Duration (minutes):</label>
+            <input type="number" id="duration_${showCount}" class="form-control" value="60" min="5" max="120"/>
+        </div>
+    </div>
+    <button type="button" class="btn btn-danger removeShowButton">Remove</button>
+    <hr>
     `;
-    
     showContainer.appendChild(showDiv);
 
     showDiv.querySelector('.removeShowButton').addEventListener('click', function() {
