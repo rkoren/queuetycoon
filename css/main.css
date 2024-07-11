@@ -214,3 +214,7 @@ th {
 .descending::after {
     content: " \25BC";
 }
+
+.limited-width {
+    max-width: 100px;
+}
