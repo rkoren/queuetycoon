@@ -237,11 +237,11 @@ function addMeal() {
     mealDiv.innerHTML = `
     <div class="row mb-3">
         <div class="col-md-4">
-            <label for="restaurantSelect_${mealCount}">Restaurant:</label>
-            <select id="restaurantSelect_${mealCount}" class="form-control">
+            <label for="restaurantInput_${mealCount}">Restaurant:</label>
+            <input type="text" id="restaurantInput_${mealCount}" list="restaurantList_${mealCount}" class="form-control" placeholder="Enter or select a restaurant">
+            <datalist id="restaurantList_${mealCount}">
                 ${restaurants.map(restaurant => `<option value="${restaurant}">${restaurant}</option>`).join('')}
-                <option value="custom">Other</option>
-            </select>
+            </datalist>
         </div>
     </div>
     <div class="row mb-3">
@@ -339,7 +339,7 @@ function createShowForm(parkData) {
         .filter(child => child.entityType === 'SHOW')
         .map(show => show.name);
 
-    console.log('Populated restaurants:', shows);
+    console.log('Populated shows:', shows);
 }
 
 const maxShows = 15;
@@ -360,7 +360,7 @@ function addShow() {
     <div class="row mb-3">
         <div class="col-md-4">
             <label for="showSelect_${showCount}">Show:</label>
-            <select id="restaurantSelect_${showCount}" class="form-control">
+            <select id="showSelect_${showCount}" class="form-control">
                 ${shows.map(show => `<option value="${show}">${show}</option>`).join('')}
                 <option value="custom">Other</option>
             </select>
@@ -456,7 +456,7 @@ window.onload = function() {
     if (savedShows) {
         savedShows.forEach((show, index) => {
             addShow();
-            document.getElementById(`showSelect_${index}`).value = show.restaurant;
+            document.getElementById(`showSelect_${index}`).value = show.show;
             document.getElementById(`time_${index}`).value = show.time;
             document.getElementById(`duration_${index}`).value = show.duration;
         });

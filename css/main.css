@@ -218,3 +218,8 @@ th {
 .limited-width {
     max-width: 100px;
 }
+
+.custom-option-input {
+    display: none;
+    margin-top: 10px;
+}
